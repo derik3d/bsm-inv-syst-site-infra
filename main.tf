@@ -108,6 +108,12 @@ resource "aws_lambda_permission" "apigw_lambda" {
   source_arn    = "arn:aws:apigateway:${var.region}::/restapis/${aws_apigatewayv2_api.api_bigstoremanager.id}/*/*"
 }
 
+resource "aws_apigatewayv2_stage" "stage" {
+  api_id = aws_apigatewayv2_api.api_bigstoremanager.id
+  name   = "prod"
+  auto_deploy = true
+}
+
 ##------------------------------------S3_STATIC-----------------------------------------
 
 resource "aws_s3_bucket" "angular_s3" {
